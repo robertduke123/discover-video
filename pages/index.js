@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import Banner from "../components/banner";
+import Banner from "@/components/banner/banner";
+import NavBar from "@/components/navbar/navbar";
 
 export default function Home() {
 	return (
@@ -13,8 +14,12 @@ export default function Home() {
 			</Head>
 			<div className={`${styles.page}`}>
 				<h1>Netflix</h1>
-				{/* <NavBar/> */}
-				<Banner />
+				<NavBar />
+				<Banner
+					title="Clifford the red dog"
+					subTitle="a very cute dog"
+					imgUrl="/static/clifford.webp"
+				/>
 				{/* <Card/> */}
 			</div>
 		</>
