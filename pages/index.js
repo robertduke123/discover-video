@@ -1,5 +1,6 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
+import Banner from "../components/banner";
 
 export default function Home() {
 	return (
@@ -12,6 +13,9 @@ export default function Home() {
 			</Head>
 			<div className={`${styles.page}`}>
 				<h1>Netflix</h1>
+				{/* <NavBar/> */}
+				<Banner />
+				{/* <Card/> */}
 			</div>
 		</>
 	);
