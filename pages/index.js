@@ -11,11 +11,18 @@ import {
 } from "../lib/videos";
 
 export async function getServerSideProps() {
-	const disneyVideos = getVideos();
-	return { props: { disneyVideos } };
+	const disneyVideos = await getVideos("disney trailer");
+	const productivityVideos = await getVideos("Productivity");
+
+	const travelVideos = await getVideos("indie music");
+	return { props: { disneyVideos, productivityVideos, travelVideos } };
 }
 
-export default function Home({ disneyVideos }) {
+export default function Home({
+	disneyVideos,
+	productivityVideos,
+	travelVideos,
+}) {
 	return (
 		<>
 			<Head>
@@ -33,9 +40,13 @@ export default function Home({ disneyVideos }) {
 				/>
 				<div className={styles.sectionWrapper}>
 					<SectionCards title="Disney" videos={disneyVideos} size="large" />
-					{/* <Card imgUrl="/static/clifford.webp" size="large" />
-				<Card imgUrl="/static/clifford.webp" size="medium" />
-				<Card imgUrl="/static/clifford.webp" size="small" /> */}
+					<SectionCards title="Travel" videos={travelVideos} size="small" />
+					<SectionCards
+						title="Productivity"
+						videos={productivityVideos}
+						size="medium"
+					/>
+					<SectionCards title="Popular" videos={disneyVideos} size="small" />
 				</div>
 			</div>
 		</>
