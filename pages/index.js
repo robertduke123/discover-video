@@ -2,8 +2,20 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Banner from "@/components/banner/banner";
 import NavBar from "@/components/navbar/navbar";
+import SectionCards from "@/components/card/section-cards";
 
-export default function Home() {
+import {
+	getVideos,
+	// 	getPopularVideos,
+	// 	getWatchItAgainVideos,
+} from "../lib/videos";
+
+export async function getServerSideProps() {
+	const disneyVideos = getVideos();
+	return { props: { disneyVideos } };
+}
+
+export default function Home({ disneyVideos }) {
 	return (
 		<>
 			<Head>
@@ -13,14 +25,18 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className={`${styles.page}`}>
-				<h1>Netflix</h1>
 				<NavBar />
 				<Banner
 					title="Clifford the red dog"
 					subTitle="a very cute dog"
 					imgUrl="/static/clifford.webp"
 				/>
-				{/* <Card/> */}
+				<div className={styles.sectionWrapper}>
+					<SectionCards title="Disney" videos={disneyVideos} size="large" />
+					{/* <Card imgUrl="/static/clifford.webp" size="large" />
+				<Card imgUrl="/static/clifford.webp" size="medium" />
+				<Card imgUrl="/static/clifford.webp" size="small" /> */}
+				</div>
 			</div>
 		</>
 	);
